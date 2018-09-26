@@ -1,0 +1,130 @@
+1) decide on project: Stackoverflow (just SO not SE network)
+2) research tech used: https://meta.stackexchange.com/questions/10369/which-tools-and-technologies-are-used-to-build-the-stack-exchange-network
+3) decide on my tech/stack:
+front end:
+-react(seems popular, not 100% tied to this either, vuejs is backup choice)
+-fontawesome for icons
+back end:
+-node js(have some experience)
+-postgresql(most recently used sql db, not tied to this db)
+4) design db uml: https://drive.google.com/file/d/1gkf-wXHbn-EA20VojxX50khW6Qj66rRE/view?usp=sharing
+5) make a html draft of layout (loose css styling)
+6) learn react: https://reactjs.org/tutorial/tutorial.html
+7) change frameworks:
+front end:
+-vue js(also popular, seems a bit easier to learn)
+-bootstrap vue(for styling)
+-fontawesome for icons
+back end:
+-django(have python experience, seems better suited for sql interaction than node seems to)
+-postgresql
+8) install/setup (based on https://auth0.com/blog/building-modern-applications-with-django-and-vuejs/ and https://www.djangoproject.com/start/ and https://cli.vuejs.org/guide/):
+install python 3(https://www.python.org/downloads/)
+follow: https://docs.djangoproject.com/en/2.1/intro/tutorial01/
+pip install Django==2.1.1 (I had to use 'py -m pip ...')
+pip install django(I know I this seems like repeat but the next step wasn't working until I did this)
+django-admin startproject openQuestion
+cd openQuestion
+py manage.py runserver
+test on: 127.0.0.1(it works, woot)
+?py manage.py startapp users ...https://docs.djangoproject.com/en/2.1/intro/tutorial01/#write-your-first-view
+?py manage.py startapp questions ...https://docs.djangoproject.com/en/2.1/intro/tutorial01/#write-your-first-view
+pip install psycopg2(for postgresql)
+npm install -g @vue/cli
+vue create frontend
+cd frontend
+npm run serve
+test on: http://localhost:8080/(it works, woot)
+cd ..
+git init
+
+//follow: https://cli.vuejs.org/guide/creating-a-project.html#vue-create
+
+bootstrap vue notes:
+tags/pts: <b-badge class='badge-light'>Java</b-badge> //questions: <b-badge variant="primary">4</b-badge>  //tags: <b-badge variant="info">Java</b-badge>
+Info/Newest/Featured/Frequent/Votes/Active/Unanswered: <b-button-group><b-button class="btn-outline-secondary">Info</b-button><b-button class="btn-outline-secondary">Newest</b-button><b-button class="btn-outline-secondary">Featured</b-button><b-button class="btn-outline-secondary">Frequent</b-button><b-button class="btn-outline-secondary">Votes</b-button><b-button class="btn-outline-secondary">Active</b-button><b-button class="btn-outline-secondary">Unanswered</b-button></b-button-group>
+dropdown: <b-dropdown id="ddown-header" text="Dropdown with header" class="m-2"><b-dropdown-header>Dropdown header</b-dropdown-header><b-dropdown-item-button>First item</b-dropdown-item-button><b-dropdown-item-button>Second Item</b-dropdown-item-button></b-dropdown>
+pages nav: https://bootstrap-vue.js.org/docs/components/pagination-nav
+header: https://bootstrap-vue.js.org/docs/components/navbar
+favorite/ignore tags: <b-card class="text-center"><b-card-header>Test</b-card-header>This is some text within the default card block.</b-card>
+ask question: <b-button variant="primary">Ask Question</b-button>
+
+font awesome notes:
+inbox: <i class="fas fa-inbox fa-2x" style="color:orange"></i>
+trophy: <i class="fas fa-trophy fa-2x"></i>
+question: <i class="fas fa-question-circle fa-2x"></i>
+watch: <i class="fas fa-eye"></i>
+ignore: <i class="fas fa-eye-slash"></i> or <i class="fas fa-ban"></i>
+star: <i class="fas fa-star"></i>
+up arrow: <i class="fas fa-sort-up"></i>
+down arrow: <i class="fas fa-sort-down"></i>
+flag: <i class="fas fa-flag"></i>
+check: <i class="fas fa-check"></i>
+
+file structure:
+openQuestion
++backend
+-+api
+--__init__.py
+--apps.py
+--models.py
+--admin.py
+--views.py
+-__init__.py
+-urls.py
+-wsgi.py
++node_modules
++public
+-+static
+-index.html
++src
+-+assets
+-+components
+-App.vue
+-backend.js
+-router.js
+
+routes:
+/ (top questions->btn-grp: Interesting/Featured/Hot/Week/Month)
+/questions (all questions)
+/questions/tagged/<tag>(+<tag>)*
+/questions/tagged/<tag>(+or(+<tag>)+)
+/questions/search?q=<key word>%3A<value>(+%5B<tag>%5D)?
+/q/<q id>/<u id> or /questions/<id>/<title-with-hyphens>
+/a/<1 id>/<u id> or /questions/<id>/<title-with-hyphens>/<a id>#<a id>
+/users/<id>/<username>(?tab=(topactivity|summary|answers|questions|tags|badges|bounties|points|activity))?
+/help
+
+search query (https://stackoverflow.com/help/searching):
+regex for keywords: ([a-zA-Z]+:)(([a-zA-Z]+)|("[\w\.\s]+")|(\d{4}(-\d{1,2}(-\d{1,2})?)?)|(1[ymd])|(\.\.\d+)|(\d+(\.\.(\d+)?)?))
+regex include tags: ^(\[\w+\])+(\sor\s(\[\w+\])+)?$
+regex exclude tags: (-\[\w+\])
+regex exclude words:(-(("[\w\s]+")|(\w+)))
+regex for regex: ([*\w]+)
+reg*
+some key words
+-word
+-[tag]
+"specific phrase"
+title:something
+body:something
+user:<id>|me|mine
+infavorites:<id>|mine
+intags:mine
+isaccepted:yes|true|1|no|false|0
+hascode:yes|true|1|no|false|0
+hasaccepted:yes|true|1|no|false|0
+isanswered:yes|true|1|no|false|0
+closed:yes|true|1|no|false|0
+duplicate:yes|true|1|no|false|0
+locked:yes|true|1|no|false|0
+hasnotice:yes|true|1|no|false|0
+wiki:yes|true|1|no|false|0
+score:#|#..|#..#|..#
+created:yyyy(-mm(-dd)?)? and see score ranging, 1y|1m|1d(last year, month, day)
+lastactive:
+[<tag>]([<tag>])*
+or
+url:"example.com"
+is:question
+is:answer
